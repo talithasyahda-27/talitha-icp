@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Keajaiban Kawah Ijen</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;700&family=Lato:wght@300;400;700&display=swap');
+
+        :root {
+            --primary-color: #6a8caf; /* Soft blue */
+            --secondary-color: #9ab7d3; /* Lighter soft blue */
+            --accent-color: #f0e68c; /* Soft yellow */
+            --text-color: #4a4a4a; /* Soft dark gray */
+            --background-color: #f5f5f5; /* Light gray */
+            --white: #ffffff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Lato', sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--background-color);
+            overflow-x: hidden;
+        }
+
+        .parallax-container {
+            height: 100vh;
+            overflow-x: hidden;
+            overflow-y: auto;
+            perspective: 1px;
+        }
+
+        .parallax-layer {
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+        }
+
+        .parallax-background {
+            transform: translateZ(-1px) scale(2);
+            background-image: url('/api/placeholder/1920/1080');
+            background-size: cover;
+            background-position: center;
+            z-index: -1;
+            filter: brightness(0.8);
+        }
+
+        header {
+            position: relative;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: var(--white);
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .header-content {
+            z-index: 1;
+        }
+
+        h1 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 5rem;
+            font-weight: 300;
+            margin-bottom: 1rem;
+            opacity: 0;
+            transform: translateY(50px);
+            animation: fadeInUp 1s ease forwards;
+        }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background-color: rgba(106, 140, 175, 0.8);
+            z-index: 1000;
+            transition: background-color 0.3s ease;
+        }
+
+        nav.scrolled {
+            background-color: var(--primary-color);
+        }
+
+        nav ul {
+            display: flex;
+            justify-content: center;
+            list-style-type: none;
+            padding: 1rem 0;
+        }
+
+        nav ul li {
+            margin: 0 1rem;
+        }
+
+        nav ul li a {
+            color: var(--white);
+            text-decoration: none;
+            font-weight: 400;
+            transition: color 0.3s ease;
+        }
+
+        nav ul li a:hover {
+            color: var(--accent-color);
+        }
+
+        main {
+            background-color: var(--white);
+            position: relative;
+            z-index: 1;
+            padding: 4rem 2rem;
+        }
+
+        .section {
+            max-width: 1200px;
+            margin: 0 auto 4rem;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+
+        .section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .section-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 3rem;
+            font-weight: 300;
+            color: var(--primary-color);
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .image-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .image-card {
+            position: relative;
+            overflow: hidden;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .image-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .image-card img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .image-card:hover img {
+            transform: scale(1.1);
+        }
+
+        .image-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background-color: rgba(106, 140, 175, 0.8);
+            color: var(--white);
+            padding: 1rem;
+            transform: translateY(100%);
+            transition: transform 0.3s ease;
+        }
+
+        .image-card:hover .image-overlay {
+            transform: translateY(0);
+        }
+
+        .fact-section {
+            background-color: var(--secondary-color);
+            padding: 4rem 2rem;
+            text-align: center;
+            color: var(--white);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .fact-button {
+            background-color: var(--accent-color);
+            color: var(--text-color);
+            border: none;
+            padding: 1rem 2rem;
+            font-size: 1.2rem;
+            font-weight: 400;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            margin-bottom: 1rem;
+        }
+
+        .fact-button:hover {
+            background-color: var(--white);
+            transform: scale(1.05);
+        }
+
+        #factText {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+
+        #factText.visible {
+            opacity: 1;
+        }
+
+        .bubbles {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            overflow: hidden;
+            pointer-events: none;
+        }
+
+        .bubble {
+            position: absolute;
+            bottom: -100px;
+            width: 40px;
+            height: 40px;
+            background-color: var(--accent-color);
+            border-radius: 50%;
+            opacity: 0.3;
+            animation: rise 10s infinite ease-in;
+        }
+
+        @keyframes rise {
+            0% {
+                bottom: -100px;
+                transform: translateX(0);
+            }
+            100% {
+                bottom: 1080px;
+                transform: translateX(200px);
+            }
+        }
+
+        footer {
+            background-color: var(--primary-color);
+            color: var(--white);
+            text-align: center;
+            padding: 2rem;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 3rem;
+            }
+
+            nav ul {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            nav ul li {
+                margin: 0.5rem 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="parallax-container">
+        <div class="parallax-layer parallax-background"></div>
+        <div class="parallax-layer">
+            <nav>
+                <ul>
+                    <li><a href="#tentang">Tentang</a></li>
+                    <li><a href="#galeri">Galeri</a></li>
+                    <li><a href="#fakta">Fakta Menarik</a></li>
+                </ul>
+            </nav>
+            <header>
+                <div class="header-content">
+                    <h1>Keajaiban Kawah Ijen</h1>
+                </div>
+            </header>
+            <main>
+                <section id="tentang" class="section">
+                    <h2 class="section-title">Tentang Kawah Ijen</h2>
+                    <p>Kawah Ijen adalah salah satu keajaiban alam yang terletak di Jawa Timur, Indonesia. Terkenal dengan fenomena "api biru" yang menakjubkan, Kawah Ijen menawarkan pemandangan yang luar biasa dan pengalaman yang tak terlupakan bagi para pengunjungnya. Danau kawahnya yang berwarna hijau kebiruan karena tingginya kadar asam sulfat menjadi daya tarik utama bagi para wisatawan dan peneliti dari seluruh dunia.</p>
+                </section>
+
+                <section id="galeri" class="section">
+                    <h2 class="section-title">Galeri Keindahan</h2>
+                    <div class="image-gallery">
+                        <div class="image-card">
+                            <img src="/api/placeholder/600/400" alt="Panorama Kawah Ijen">
+                            <div class="image-overlay">
+                                <h3>Panorama Menakjubkan</h3>
+                                <p>Pemandangan spektakuler Kawah Ijen dari ketinggian.</p>
+                            </div>
+                        </div>
+                        <div class="image-card">
+                            <img src="/api/placeholder/600/400" alt="Api Biru Kawah Ijen">
+                            <div class="image-overlay">
+                                <h3>Fenomena Api Biru</h3>
+                                <p>Api biru yang ikonik, hanya dapat dilihat di malam hari.</p>
+                            </div>
+                        </div>
+                        <div class="image-card">
+                            <img src="/api/placeholder/600/400" alt="Danau Asam Kawah Ijen">
+                            <div class="image-overlay">
+                                <h3>Danau Asam Terbesar</h3>
+                                <p>Danau asam vulkanik terbesar di dunia dengan warna turquoise yang menawan.</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="fakta" class="fact-section">
+                    <h2 class="section-title">Tahukah Anda?</h2>
+                    <button id="factButton" class="fact-button">Tampilkan Fakta Menarik</button>
+                    <p id="factText"></p>
+                    <div class="bubbles">
+                        <div class="bubble" style="left: 10%; animation-delay: 0s;"></div>
+                        <div class="bubble" style="left: 20%; animation-delay: 2s;"></div>
+                        <div class="bubble" style="left: 35%; animation-delay: 4s;"></div>
+                        <div class="bubble" style="left: 50%; animation-delay: 6s;"></div>
+                        <div class="bubble" style="left: 65%; animation-delay: 8s;"></div>
+                        <div class="bubble" style="left: 80%; animation-delay: 10s;"></div>
+                        <div class="bubble" style="left: 90%; animation-delay: 12s;"></div>
+                    </div>
+                </section>
+            </main>
+            <footer>
+                <p>&copy; 2024 Keajaiban Kawah Ijen. Semua hak cipta dilindungi.</p>
+            </footer>
+        </div>
+    </div>
+
+    <script>
+        const facts = [
+            "Api biru di Kawah Ijen hanya bisa dilihat pada malam hari atau dini hari.",
+            "Kawah Ijen memiliki danau asam terbesar di dunia.",
+            "Para penambang belerang di Kawah Ijen harus menuruni dan menaiki tebing curam setiap hari.",
+            "Kawah Ijen terletak di ketinggian sekitar 2.400 meter di atas permukaan laut.",
+            "Belerang yang dihasilkan Kawah Ijen digunakan dalam industri kosmetik dan obat-obatan."
+        ];
+
+        const factButton = document.getElementById('factButton');
+        const factText = document.getElementById('factText');
+
+        factButton.addEventListener('click', () => {
+            const randomFact = facts[Math.floor(Math.random() * facts.length)];
+            factText.textContent = randomFact;
+            factText.classList.add('visible');
+        });
+
+        // Parallax scrolling effect
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const parallaxBackground = document.querySelector('.parallax-background');
+            parallaxBackground.style.transform = `translateY(${scrolled * 0.5}px)`;
+        });
+
+        // Navbar color change on scroll
+        window.addEventListener('scroll', () => {
+            const nav = document.querySelector('nav');
+            if (window.scrollY > 50) {
+                nav.classList.add('scrolled');
+            } else {
+                nav.classList.remove('scrolled');
+            }
+        });
+
+        // Reveal sections on scroll
+        const revealSection = (entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        };
+
+        const sectionObserver = new IntersectionObserver(revealSection, {
+            root: null,
+            threshold: 0.15,
+        });
+
+        document.querySelectorAll('.section').forEach(section => {
+            sectionObserver.observe(section);
+        });
+    </script>
+</body>
+</html>
