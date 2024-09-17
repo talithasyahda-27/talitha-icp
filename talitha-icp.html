@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CV Saya - Portfolio Profesional</title>
+    <style>
+        :root {
+            --primary-color: #3498db;
+            --secondary-color: #2c3e50;
+            --accent-color: #e74c3c;
+            --text-color: #333;
+            --bg-color: #ecf0f1;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--bg-color);
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        header {
+            background-color: var(--primary-color);
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+        header::after {
+            content: "";
+            position: absolute;
+            bottom: -50px;
+            left: 0;
+            right: 0;
+            height: 100px;
+            background-color: var(--bg-color);
+            transform: skewY(-3deg);
+        }
+        h1, h2 {
+            margin-bottom: 0.5rem;
+        }
+        h1 {
+            font-size: 2.5rem;
+            text-transform: uppercase;
+        }
+        h2 {
+            color: var(--primary-color);
+            border-bottom: 2px solid var(--primary-color);
+            padding-bottom: 5px;
+            margin-top: 2rem;
+        }
+        .profile-img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            border: 5px solid white;
+            margin-bottom: 1rem;
+        }
+        .section {
+            background-color: white;
+            margin-bottom: 2rem;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        .skills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        .skill {
+            background-color: var(--accent-color);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+        }
+        .contact-info {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+        }
+        .contact-item {
+            display: flex;
+            align-items: center;
+            margin: 10px;
+        }
+        .contact-item i {
+            margin-right: 10px;
+            color: var(--primary-color);
+        }
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+            header {
+                padding: 1rem 0;
+            }
+            h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js"></script>
+</head>
+<body>
+    <header>
+        <img src="/api/placeholder/150/150" alt="Foto Profil" class="profile-img">
+        <h1>Nama Anda</h1>
+        <p>Profesi Anda | Spesialisasi Anda</p>
+    </header>
+
+    <div class="container">
+        <section class="section">
+            <h2>Profil</h2>
+            <p>Seorang profesional yang berdedikasi dan inovatif dengan pengalaman dalam [bidang Anda]. Memiliki kemampuan [keterampilan utama Anda] yang kuat dan passion untuk [minat profesional Anda].</p>
+        </section>
+
+        <section class="section">
+            <h2>Pengalaman Kerja</h2>
+            <div>
+                <h3>Senior [Posisi Anda] - [Nama Perusahaan]</h3>
+                <p><em>Januari 2020 - Sekarang</em></p>
+                <ul>
+                    <li>Mengelola proyek-proyek penting yang menghasilkan peningkatan efisiensi sebesar 30%.</li>
+                    <li>Memimpin tim lintas fungsi dalam pengembangan produk inovatif.</li>
+                    <li>Mengoptimalkan proses kerja yang menghasilkan penghematan biaya tahunan sebesar Rp500 juta.</li>
+                </ul>
+            </div>
+            <!-- Tambahkan pengalaman kerja lainnya di sini -->
+        </section>
+
+        <section class="section">
+            <h2>Pendidikan</h2>
+            <div>
+                <h3>Sarjana [Jurusan Anda] - [Nama Universitas]</h3>
+                <p><em>Lulus tahun 2018</em></p>
+                <p>IPK: 3.8/4.0 | Penghargaan: Cum Laude</p>
+            </div>
+            <!-- Tambahkan pendidikan lainnya di sini -->
+        </section>
+
+        <section class="section">
+            <h2>Keterampilan</h2>
+            <div class="skills">
+                <span class="skill">Manajemen Proyek</span>
+                <span class="skill">Analisis Data</span>
+                <span class="skill">Kepemimpinan Tim</span>
+                <span class="skill">Komunikasi</span>
+                <span class="skill">Pemecahan Masalah</span>
+                <!-- Tambahkan keterampilan lainnya di sini -->
+            </div>
+        </section>
+
+        <section class="section">
+            <h2>Kontak</h2>
+            <div class="contact-info">
+                <div class="contact-item">
+                    <i class="fas fa-envelope"></i>
+                    <span>email@anda.com</span>
+                </div>
+                <div class="contact-item">
+                    <i class="fas fa-phone"></i>
+                    <span>+62 123-456-7890</span>
+                </div>
+                <div class="contact-item">
+                    <i class="fab fa-linkedin"></i>
+                    <span>linkedin.com/in/namaanda</span>
+                </div>
+                <div class="contact-item">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <span>Kota, Negara</span>
+                </div>
+            </div>
+        </section>
+    </div>
+</body>
+</html>
